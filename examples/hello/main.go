@@ -1,20 +1,17 @@
 package main
 
 import (
-	"embed"
-
 	"github.com/go-minstack/core"
 	"github.com/go-minstack/migration"
 	"github.com/go-minstack/sqlite"
-)
 
-//go:embed migrations/*.sql
-var migrationsFS embed.FS
+	"example/migration-hello/migrations"
+)
 
 func main() {
 	app := core.New(
 		sqlite.Module(),
-		migration.Module(migrationsFS),
+		migration.Module(migrations.FS),
 	)
 	app.Invoke(migration.Run)
 	app.Run()
